@@ -1,0 +1,79 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="WaterMark.Funs.RealTimeCameraPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="#FFF5E8BD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28"/>
+
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Grid.RowSpan="2">
+            <Grid x:Name="photoGrid" HorizontalAlignment="Left" Height="682" VerticalAlignment="Top" Width="480" Visibility="Collapsed">
+                <Image HorizontalAlignment="Left" Height="682" VerticalAlignment="Top" Width="480"/>
+            </Grid>
+            <Canvas x:Name="cameraCanvas" Margin="0,0,0,86">
+                <Canvas.Background>
+                    <VideoBrush x:Name="viewfinderBrush" />
+                </Canvas.Background>
+                <TextBlock 
+                x:Name="focusBrackets" 
+                Text="┌   ┐└   ┘" 
+                FontSize="40" Foreground="#DEFF0000" Height="155" Width="93" UseLayoutRounding="True"/>
+            </Canvas>
+        </Grid>
+        <!--模板选择栏，完成-->
+        <Grid x:Name="templateSelectNameGrid" HorizontalAlignment="Left" Height="98" Margin="0,544,-2,0" Grid.Row="1" VerticalAlignment="Top" Width="482" Background="#99F7D4AA" Grid.RowSpan="1">
+            <Grid.Projection>
+                <PlaneProjection/>
+            </Grid.Projection>
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+                <StackPanel Orientation="Horizontal" Height="99" >
+                    <Button x:Name="templateButton0" Content="时 间" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton1" Content="天 气" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton2" Content="分 贝" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton4" Content="图 章" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton5" Content="旅 行" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton6" Content="条 幅" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton7" Content="时 段" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton8" Content="位 置" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                </StackPanel>
+            </ListBox>
+        </Grid> 
+        <!--顶部的提示条幅-->
+        <Grid x:Name="toastgrid" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="480" Background="{StaticResource PhoneAccentBrush}" RenderTransformOrigin="0.5,0.5" Margin="-7,0,0,0" Visibility="Collapsed">
+            <Grid.RenderTransform>
+                <CompositeTransform TranslateX="7.056"/>
+            </Grid.RenderTransform>
+            <TextBlock x:Name="toastText" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="460" FontSize="22" Margin="10,0,0,0" Height="37"/>
+        </Grid>
+
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar x:Name="MainBar" IsVisible="True" Opacity="0.6" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="AutoFocusButton" IconUri="/Assets2/AppBar/appbar.folder.rest.png" Text="自动对焦" Click="choosePhoto"  />
+            <shell:ApplicationBarIconButton x:Name="FlashButton" IconUri="/Assets2/AppBar/appbar.favs.rest.png" Text="闪光效果" Click="choosePhoto"  />
+            <shell:ApplicationBarIconButton x:Name="takePhotoButton" IconUri="/Assets2/AppBar/appbar.feature.camera.rest.png" Text="拍  照" Click="cameraCaptureButton"  />
+            <shell:ApplicationBarIconButton x:Name="templateSelectButton" IconUri="/Toolkit.Content/ApplicationBar.Select.png" Text="模板列表" Click="SelectNameTmp_Click" />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="settingButton" IsEnabled="True" Text="设   置" Click="Setting_Click"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

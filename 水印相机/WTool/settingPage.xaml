@@ -1,0 +1,145 @@
+﻿<phone:PhoneApplicationPage x:Name="settingpage_xaml"
+    x:Class="水印相机.settingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Style="{StaticResource PageTranstionStyle}" 
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" BackKeyPress="PhoneApplicationPage_BackKeyPress" Background="Black" BorderBrush="White">
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="animation_resetButtonClick">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="resetSettingsButton">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_textinput_click">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="usersign">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1.03"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+    <phone:PhoneApplicationPage.Foreground>
+        <SolidColorBrush Color="White"/>
+    </phone:PhoneApplicationPage.Foreground>
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="#FFF5E8BD">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Margin="0,26,1,661" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Fill="#FF8FAAF9">
+            <Rectangle.RenderTransform>
+                <CompositeTransform ScaleY="-1"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <controls:Pivot Title="" Grid.RowSpan="2">
+            <!--枢轴项一-->
+            <controls:PivotItem Header="Settings" Margin="12,2,12,-19">
+                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,126" Grid.ColumnSpan="2">
+                    <ListBox Margin="0,0,0,-112">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <toolkit:WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.Items>
+                            <toolkit:ToggleSwitch x:Name="netSwitch"  Checked="netSwitch_Checked" Unchecked="netSwitch_Unchecked" Foreground="#FF8FAAF9" Width="446" Height="115" >
+                                <toolkit:ToggleSwitch.HeaderTemplate>
+                                    <DataTemplate>
+                                        <ContentControl FontSize="20" Content="Get weather info when opening" Foreground="#FF89AD5B"/>
+                                    </DataTemplate>
+                                </toolkit:ToggleSwitch.HeaderTemplate>
+                            </toolkit:ToggleSwitch>
+                            <toolkit:ToggleSwitch x:Name="showWPSwith"  Checked="showWPSwith_Checked" Unchecked="showWPSwith_Unchecked" Foreground="#FF8FAAF9" Width="446" Height="115" >
+                                <toolkit:ToggleSwitch.HeaderTemplate>
+                                    <DataTemplate>
+                                        <ContentControl FontSize="20" Content="Show device info if available" Foreground="#FF89AD5B"/>
+                                    </DataTemplate>
+                                </toolkit:ToggleSwitch.HeaderTemplate>
+                            </toolkit:ToggleSwitch>
+                            <toolkit:ToggleSwitch x:Name="saveRealBackup" Foreground="#FF8FAAF9" Checked="saveRealBackup_Checked" Unchecked="saveRealBackup_Unchecked" Grid.RowSpan="2" Width="446" Height="115" >
+                                <toolkit:ToggleSwitch.HeaderTemplate>
+                                    <DataTemplate>
+                                        <ContentControl FontSize="20" Content="Save original photo when capture" Foreground="#FF89AD5B"/>
+                                    </DataTemplate>
+                                </toolkit:ToggleSwitch.HeaderTemplate>
+                            </toolkit:ToggleSwitch>
+                            <toolkit:ToggleSwitch x:Name="useFrontCamButton" Foreground="#FF8FAAF9" Checked="useFrontCamButton_Checked" Unchecked="useFrontCamButton_Unchecked" Grid.RowSpan="2" Width="446" Height="115" >
+                                <toolkit:ToggleSwitch.HeaderTemplate>
+                                    <DataTemplate>
+                                        <ContentControl FontSize="20" Content="Use fornt camera when capture" Foreground="#FF89AD5B"/>
+                                    </DataTemplate>
+                                </toolkit:ToggleSwitch.HeaderTemplate>
+                            </toolkit:ToggleSwitch>
+                            <toolkit:ListPicker Name="resolutionList" Width="420" >
+                                <toolkit:ListPicker.HeaderTemplate>
+                                    <DataTemplate>
+                                        <ContentControl FontSize="20" Content="Camera resolution level" Foreground="#FF89AD5B" />
+                                    </DataTemplate>
+                                </toolkit:ListPicker.HeaderTemplate>
+                                <toolkit:ListPickerItem x:Name="resA" Content="                         Best" Foreground="#FF8FAAF9" Margin="0,0,-6,0"/>
+                                <toolkit:ListPickerItem x:Name="resB" Content="                        Great" Foreground="#FF8FAAF9" Margin="0,0,4,0"/>
+                                <toolkit:ListPickerItem x:Name="resC" Content="                         SNS" Foreground="#FF8FAAF9" Margin="0,0,4,0"/>
+                                <toolkit:ListPickerItem x:Name="resD" Content="                        Small" Foreground="#FF8FAAF9" Margin="0,0,4,0"/>
+                            </toolkit:ListPicker>
+                            <Grid Width="446" Height="210">
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Signature：" VerticalAlignment="Top" FontSize="24" Margin="3,23,0,0" Foreground="#FF8FAAF9"/>
+                                <TextBox x:Name="usersign" HorizontalAlignment="Left" Height="76" TextWrapping="Wrap" VerticalAlignment="Top" Width="327" LostFocus="addSignature" Margin="127,4,-8,0" RenderTransformOrigin="0.5,0.5" GotFocus="usersign_GotFocus">
+                                    <TextBox.RenderTransform>
+                                        <CompositeTransform/>
+                                    </TextBox.RenderTransform>
+                                </TextBox>
+                                <TextBlock Text=" Reset every setting" Margin="0,85,-8,94" Foreground="#FF89AD5B" FontSize="20" />
+                                <TextBlock HorizontalAlignment="Left" Margin="0,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="87" Width="310" Foreground="#FF8FAAF9" Text="Be careful!If terrible errors often ocurr,try it or email me,please."/>
+                                <Button x:Name="resetSettingsButton" Content="Reset" HorizontalAlignment="Left" Margin="310,123,0,0" VerticalAlignment="Top" Width="126" Foreground="#FFF76C38" BorderBrush="#FFF76C38" Click="resetSettingsButton_Click" Height="80" RenderTransformOrigin="0.5,0.5">
+                                    <Button.RenderTransform>
+                                        <CompositeTransform/>
+                                    </Button.RenderTransform>
+                                </Button>
+                            </Grid>
+                        </ListBox.Items>
+                    </ListBox>
+
+                    <!--<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,81,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="436"/>-->
+                    <!--<TextBlock x:Name="resolutionTextBlock" HorizontalAlignment="Left" Margin="10,81,0,0" TextWrapping="Wrap" Text="取景分辨率" VerticalAlignment="Top" Height="50" Width="436" Foreground="#FF8FAAF9" FontSize="30" TextAlignment="Center" LineHeight="2" Grid.Row="1"/>-->
+                </Grid>
+            </controls:PivotItem>
+
+            <!--枢轴项二-->
+            <controls:PivotItem Header="About" Margin="12,28,12,-57" Height="606" VerticalAlignment="Top">
+                <Grid Height="606">
+                    <Button x:Name="voteButoon" Content="Commit this app" HorizontalAlignment="Left" VerticalAlignment="Top" Width="456" BorderThickness="1,1,2,3" Background="Transparent" Foreground="#FF8FAAF9" BorderBrush="#FFF76C38" Click="voteButton_Click" Margin="0,351,0,0"/>
+                    <Grid Margin="10,10,-10,166">
+                        <TextBlock Text="    WaterMark Camera is developed by &#xD;&#xA;Penguind.It helps adding weather, time,&#xD;&#xA;icons on your photo.Then share it with &#xD;&#xA;your friend.&#xD;&#xA;No different between trial or buy version " Margin="28,10,37,194" FontSize="22" Foreground="#FF608B4E" />
+                    </Grid>
+                    <Image Source="/WaterMark;component/Assets2/B100.png" Margin="165,195,141,280"></Image>
+                    <Button x:Name="mailButoon" Content="Email to me" HorizontalAlignment="Left" VerticalAlignment="Top" Width="456" BorderThickness="1,1,2,3" Background="Transparent" Foreground="#FF8FAAF9" BorderBrush="#FFF76C38" Click="mailButton_Click" Margin="0,426,0,0"/>
+                    <Button x:Name="donateButoon" Content="Donate $1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="456" BorderThickness="1,1,2,3" Background="Transparent" Foreground="#FF8FAAF9" BorderBrush="#FFF76C38" Click="voteButton_Click" Margin="0,501,0,0"/>
+                    <TextBlock x:Name="thanksText" HorizontalAlignment="Left" Margin="108,514,0,0" TextWrapping="Wrap" Text="Thanks for your generous. I will try to make it better." VerticalAlignment="Top" Height="57" Width="238" Foreground="#FF668D52" Visibility="Collapsed"/>
+                </Grid>
+            </controls:PivotItem>
+        </controls:Pivot>
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="titleText" Text="WaterMark Camera" Style="{StaticResource PhoneTextNormalStyle}" Foreground="#FF8FAAF9"/>
+        </StackPanel>
+
+        <!--ContentPanel - 在此处放置其他内容-->
+    </Grid>
+</phone:PhoneApplicationPage>

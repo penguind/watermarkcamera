@@ -1,0 +1,74 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="WaterMark.WTool.Colorw2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c4fToolkit="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    Style="{StaticResource PageTranstionStyle}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" BackKeyPress="PhoneApplicationPage_BackKeyPress">
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="#FFF5E8BD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="WaterMark Camera" Style="{StaticResource PhoneTextNormalStyle}" Foreground="#FF8FAAF9" FontSize="20" FontWeight="Bold"/>
+        </StackPanel>
+
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Margin="12,49,12,0" Grid.RowSpan="2">
+            <ScrollViewer>
+                <StackPanel>
+                    <Grid Height="402" Width="447">
+                        <Grid Margin="10,134,150,44" Height="129">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="323*"/>
+                                <ColumnDefinition Width="113*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="413*"/>
+                                <RowDefinition Height="22*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="title"  HorizontalAlignment="Left" Margin="-5,-174,-144,0" TextWrapping="Wrap" Text="Color Preview" VerticalAlignment="Top" Height="94" Width="436" FontSize="70" Foreground="White" Grid.ColumnSpan="2"/>
+                            <c4fToolkit:ColorPicker x:Name="m_colorpicker" Margin="78,-75,-72,-85" Grid.RowSpan="2" ColorChanged="m_colorpicker_ColorChanged" Grid.ColumnSpan="2" />
+                        </Grid>
+                    </Grid>
+                    <Grid Height="93" RenderTransformOrigin="0.5,0.5">
+                        <TextBlock HorizontalAlignment="Left" Margin="15.226,34.458,0,0" TextWrapping="Wrap" Text="transparency:" VerticalAlignment="Top" RenderTransformOrigin="0.469,0.593" Height="34" Width="129.829" UseLayoutRounding="False" d:LayoutRounding="Auto" Foreground="#FF8FAAF9" FontWeight="Bold">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform Rotation="0.282"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <Slider x:Name="aSlider" HorizontalAlignment="Left" Margin="155,25,0,-14" VerticalAlignment="Top" Width="156" Height="82" ValueChanged="aSlider_ValueChanged" Background="#FF3C3C3C"/>
+                        <TextBlock x:Name="aPer" HorizontalAlignment="Left" Margin="325,37,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="52" Height="37" TextAlignment="Right" Foreground="#FF8FAAF9" FontWeight="Bold"/>
+                    </Grid>
+                    <Grid x:Name="simpleSettingGrid" Height="225">
+                        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Simple templates font settings:" VerticalAlignment="Top" FontSize="22" Height="41" Width="372" Foreground="#FF89AD5B" FontWeight="Bold"/>
+                        <TextBox x:Name="sizeTextBox" HorizontalAlignment="Left" Height="74" Margin="116,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117" InputScope="Number"/>
+                        <CheckBox x:Name="useBackGround" Content="Black background" Margin="223,34,0,0" VerticalAlignment="Top" Height="77" RenderTransformOrigin="0.5,0.5" Foreground="#FF8FAAF9" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Width="233"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="-2,56,0,0" TextWrapping="Wrap" Text="Proportion:" VerticalAlignment="Top" Height="55" Foreground="#FF8FAAF9" FontWeight="Bold" Width="113"/>
+                        <Grid>
+                            <RadioButton x:Name="simpleAlignmentLeft" Content="Left" Margin="10,140,307,10" IsChecked="True" Foreground="#FF8FAAF9" FontWeight="Bold"/>
+                            <RadioButton x:Name="simpleAlignmentCenter" Content="Center" Margin="149,140,164,10" Foreground="#FF8FAAF9" FontWeight="Bold"/>
+                            <RadioButton x:Name="simpleAlignmentRight" Content="Right" Margin="297,140,0,10" Foreground="#FF8FAAF9" FontWeight="Bold"/>
+                        </Grid>
+                        <TextBlock HorizontalAlignment="Left" Margin="10,108,0,0" TextWrapping="Wrap" Text="Text alignment:" VerticalAlignment="Top" FontSize="20" Height="41" Width="372" Foreground="#FF8FAAF9" FontWeight="Bold"/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

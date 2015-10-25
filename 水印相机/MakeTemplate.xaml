@@ -1,0 +1,45 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="WaterMark.MakeTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid HorizontalAlignment="Left" Height="758" Margin="10,10,0,0" VerticalAlignment="Top" Width="460">
+            <!--枢轴控件-->
+            <Image HorizontalAlignment="Left" Height="100" Margin="10,42,0,0" VerticalAlignment="Top" Width="100"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="水印相机——模板编辑" VerticalAlignment="Top"/>
+            <Image Height="343" Margin="10,42,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="440"/>
+            <Slider x:Name="xSilder" HorizontalAlignment="Left" Margin="402,42,0,0" VerticalAlignment="Top" Width="48" Height="343" RenderTransformOrigin="0.5,0.5" Orientation="Vertical"/>
+            <Slider HorizontalAlignment="Left" Margin="0,390,0,0" VerticalAlignment="Top" Width="460" Height="80"/>
+            <Slider HorizontalAlignment="Left" Margin="10,470,0,0" VerticalAlignment="Top" Width="200" Height="81"/>
+            <Button Content="添加" HorizontalAlignment="Left" Margin="210,470,0,0" VerticalAlignment="Top" Width="117"/>
+            <TextBlock HorizontalAlignment="Left" Margin="21,512,0,0" TextWrapping="Wrap" Text="字体大小" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="13,430,0,0" TextWrapping="Wrap" Text="x" VerticalAlignment="Top"/>
+            <Button Content="生成" HorizontalAlignment="Left" Margin="332,470,0,0" VerticalAlignment="Top" Width="119"/>
+            <TextBlock HorizontalAlignment="Left" Margin="420,15,0,0" TextWrapping="Wrap" Text="Y" VerticalAlignment="Top"/>
+            <Grid HorizontalAlignment="Left" Height="202" Margin="0,556,0,0" VerticalAlignment="Top" Width="460">
+                <RadioButton Content="时间" HorizontalAlignment="Left" Margin="3,10,0,0" VerticalAlignment="Top"/>
+                <RadioButton Content="天气" HorizontalAlignment="Left" Margin="117,10,0,0" VerticalAlignment="Top"/>
+                <RadioButton Content="位置" HorizontalAlignment="Left" Margin="231,10,0,0" VerticalAlignment="Top"/>
+                <RadioButton Content="标签" HorizontalAlignment="Left" Margin="345,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.171,-0.023"/>
+                <Grid HorizontalAlignment="Left" Height="105" Margin="10,87,0,0" VerticalAlignment="Top" Width="440">
+                    <CheckBox Content="年月日" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top"/>
+                    <CheckBox Content="时分秒" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

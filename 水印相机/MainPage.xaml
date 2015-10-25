@@ -1,0 +1,695 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="水印相机.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True" BackKeyPress="backKeySetting"
+    Style="{StaticResource PageTranstionStyle}"
+    >
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="animation_m_photo_right">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetX)" Storyboard.TargetName="m_photo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_m_photo_left">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetX)" Storyboard.TargetName="m_photo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_m_photo_both">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="m_photo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_input1_click">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="inputBox">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1.03"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.03"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_toastshow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="toastgrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.002"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="toastgrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-232.444"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="7.556"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="7.556"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="7.556"/>
+            </DoubleAnimationUsingKeyFrames>
+            <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="toastgrid">
+                <EasingPointKeyFrame KeyTime="0" Value="0.5,0.5"/>
+                <EasingPointKeyFrame KeyTime="0:0:0.1" Value="0,0.5"/>
+            </PointAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="toastgrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_templateselectlist">
+            <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetX)" Storyboard.TargetName="templateSelectNameGrid" d:IsOptimized="True"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetY)" Storyboard.TargetName="templateSelectNameGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-4"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetZ)" Storyboard.TargetName="templateSelectNameGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="13"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="6"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_bgChoose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetX)" Storyboard.TargetName="backcolorEditGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_editGrid_show">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="editGrid">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetX)" Storyboard.TargetName="editGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="480"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="350"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="110"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-15"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_editGrid_hide">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="editGrid">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetX)" Storyboard.TargetName="editGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="40"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="380"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="485"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_iconchoose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetX)" Storyboard.TargetName="iconSelectGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_sundrop_coloregg">
+            <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetX)" Storyboard.TargetName="image">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-10"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-12"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-14"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-16"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.GlobalOffsetY)" Storyboard.TargetName="image">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="7"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="36"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="47"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_photo_hide">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="m_photo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.99"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.01"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="m_photo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.99"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.01"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_photo_show">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="m_photo">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.01"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.02"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="m_photo">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.01"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.01"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_index_hide">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="indexPageCanvas">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.9999"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.01"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="indexPageCanvas">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.9999"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.01"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_tap_index2_on">
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewX)" Storyboard.TargetName="hubTileAlbum" AutoReverse="True"/>
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewY)" Storyboard.TargetName="hubTileAlbum" AutoReverse="True"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="hubTileAlbum">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="hubTileAlbum">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_tap_index1_on">
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewX)" Storyboard.TargetName="hubTileCamera" AutoReverse="True"/>
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewY)" Storyboard.TargetName="hubTileCamera" AutoReverse="True"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="hubTileCamera">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="hubTileCamera">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_tap_index3_on">
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewX)" Storyboard.TargetName="hubTilePuzzle" AutoReverse="True"/>
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewY)" Storyboard.TargetName="hubTilePuzzle" AutoReverse="True"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="hubTilePuzzle">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="hubTilePuzzle">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_tap_index4_on">
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewX)" Storyboard.TargetName="hubTileIcon" AutoReverse="True"/>
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewY)" Storyboard.TargetName="hubTileIcon" AutoReverse="True"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="hubTileIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="hubTileIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_tap_index5_on">
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewX)" Storyboard.TargetName="hubTileSetting" AutoReverse="True"/>
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewY)" Storyboard.TargetName="hubTileSetting" AutoReverse="True"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="hubTileSetting">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="hubTileSetting">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_showindex">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="indexPageCanvas">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.01"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="indexPageCanvas">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.01"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="animation_tap_index6_on">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="hubTileRealCamera">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="hubTileRealCamera">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.96"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="#FFF5E8BD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="207*"/>
+            <RowDefinition Height="517*"/>
+        </Grid.RowDefinitions>
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <!--实时相机背景-->
+        <Canvas x:Name="realTimeCanvas" HorizontalAlignment="Left" Height="695" VerticalAlignment="Bottom" Width="480" Grid.RowSpan="3" Margin="0,0,0,73" Background="#33000000" Visibility="Collapsed">
+            <!--<Image x:Name="r_photo" Height="694" Width="480" Source="WElement/EmptyCanvasImage.png"/>-->
+            <Canvas x:Name="cameraCanvas" Width="480" Height="640">
+                <Canvas.Background>
+                    <VideoBrush x:Name="viewfinderBrush" />
+                </Canvas.Background>
+                <TextBlock 
+    				x:Name="focusBrackets" 
+    				Text="┌   ┐└   ┘" 
+    				FontSize="40" Foreground="#DEFFFFFF" Height="155" Width="93" UseLayoutRounding="True" Visibility="Collapsed"/>
+            </Canvas>
+        </Canvas>
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28"/>
+        <Grid x:Name="ContentPanel" Margin="0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Grid.RowSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RenderTransform>
+                <CompositeTransform Rotation="-0.075"/>
+            </Grid.RenderTransform>
+            <!--首页展示的五个按钮-->
+            <!--预览的图片-->
+            <Image x:Name="m_photo" HorizontalAlignment="Center" Margin="0,-24,0,105" Width="480" RenderTransformOrigin="0.5,0.5" Source="/Assets2/EmptyCanvasImage.png" VerticalAlignment="Center" Height="687" >
+                <Image.Projection>
+                    <PlaneProjection/>
+                </Image.Projection>
+                <Image.RenderTransform>
+                    <CompositeTransform Rotation="0.078"/>
+                </Image.RenderTransform>
+                <toolkit:GestureService.GestureListener>
+                    <!--DoubleTap="imageGesture_DoubleTap"-->
+                    <toolkit:GestureListener x:Name="imageGesture" 
+        				DragDelta="imageGesture_DragDelta" 
+        				DragCompleted="imageGesture_DragCompleted" 
+        				DragStarted="imageGesture_DragStarted" DoubleTap="imageGesture_DoubleTap" />
+                </toolkit:GestureService.GestureListener>
+            </Image>
+            <!--首页展示的五个按钮-->
+            <Canvas x:Name="indexPageCanvas" HorizontalAlignment="Left" Height="588" Margin="10,98,0,0" VerticalAlignment="Top" Width="462" RenderTransformOrigin="0.5,0.5">
+                <Canvas.RenderTransform>
+                    <CompositeTransform/>
+                </Canvas.RenderTransform>
+                <Grid xmlns:adctl="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI" Grid.Row="1">
+                    <adctl:AdControl x:Name="indexADControl" Height="80" Width="485" Margin="-14,592,14,-592" AdUnitId="10727956" ApplicationId="3c871e60-720d-4bfd-89ed-1b31b408c7d6" IsAutoCollapseEnabled="True" IsAutoRefreshEnabled="True" AdRefreshed="indexADControl_AdRefreshed" />
+                    <!--<adctl:AdControl x:Name="indexADControl" Height="80" Width="480" Margin="-10,591,10,-591" AdUnitId="TextAd" Latitude="39.9" Longitude="116.3" ApplicationId="test_client" />-->
+                </Grid>
+                <Grid Height="676" Width="452">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="659*"/>
+                        <RowDefinition Height="17*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Margin="0,10,-16,10" HorizontalAlignment="Right" Width="422">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <toolkit:WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.Items> 
+                            <toolkit:HubTile Title="Camera" x:Name="hubTileRealCamera" Message="Camera with realtime view" Background="#FF89AD5B" Source="Assets2/indexPageIcon/Camera.png" Tap="hubTileRealCamera_Tap" RenderTransformOrigin="0.5,0.5" MouseEnter="hubTileCamera_MouseEnter" Width="200" Height="173">
+                                <toolkit:HubTile.RenderTransform>
+                                    <CompositeTransform/>
+                                </toolkit:HubTile.RenderTransform>
+                            </toolkit:HubTile>
+                            <toolkit:HubTile Title="Album" x:Name="hubTileAlbum" Message="Photo from album or system camera." Background="#FF89AD5B" Source="Assets2/indexPageIcon/Picture.png" Tap="hubTileAlbum_Tap" RenderTransformOrigin="0.5,0.5"  MouseEnter="hubTileCamera_MouseEnter" Width="213" Height="173">
+                                <toolkit:HubTile.RenderTransform>
+                                    <CompositeTransform/>
+                                </toolkit:HubTile.RenderTransform>
+                            </toolkit:HubTile>
+                            <toolkit:HubTile Title="Icon" x:Name="hubTileIcon" Message="Set icon for showing on many templates" Background="#FF89AD5B" Source="Assets2/indexPageIcon/Heart.png" Tap="hubTileIcon_Tap" MouseEnter="hubTileCamera_MouseEnter" RenderTransformOrigin="0.5,0.5" Width="200" Height="200" >
+                                <toolkit:HubTile.RenderTransform>
+                                    <CompositeTransform/>
+                                </toolkit:HubTile.RenderTransform>
+                            </toolkit:HubTile>
+                            <toolkit:HubTile Title="Settings" x:Name="hubTileSetting" Message="Set the app like you want" Background="#FF89AD5B" Source="Assets2/indexPageIcon/Settings.png" Tap="hubTileSetting_Tap" MouseEnter="hubTileCamera_MouseEnter" RenderTransformOrigin="0.5,0.5" Width="213" Height="200"  >
+                                <toolkit:HubTile.RenderTransform>
+                                    <CompositeTransform/>
+                                </toolkit:HubTile.RenderTransform>
+                            </toolkit:HubTile>
+                            <toolkit:HubTile Title="Puzzles" x:Name="hubTilePuzzle" Message="List pictures in a long picture" Background="#FF89AD5B" Source="Assets2/indexPageIcon/Conditional Formatting.png" Tap="hubTilePuzzle_Tap"  MouseEnter="hubTileCamera_MouseEnter" RenderTransformOrigin="0.5,0.5" Width="200" Height="173">
+                                <toolkit:HubTile.RenderTransform>
+                                    <CompositeTransform/>
+                                </toolkit:HubTile.RenderTransform>
+                            </toolkit:HubTile>
+                        </ListBox.Items>
+                    </ListBox>
+                </Grid>
+                <Grid Canvas.Left="321" Canvas.Top="-104" Height="138" Width="131">
+                    <Grid.Resources>
+                        <Storyboard x:Name="roateFlowerStory" RepeatBehavior="Forever" >
+                            <DoubleAnimation Storyboard.TargetName="sunflowerRoateTransform" Storyboard.TargetProperty="Angle" Duration="0:0:3" From="0" By="15" To="25" AutoReverse="True"/>
+                        </Storyboard>
+                    </Grid.Resources>
+                    <Image Height="31" Canvas.Left="327" Canvas.Top="550" Width="100" Source="/Assets2/sunflower-root.png" Margin="30,93,1,12" Tap="colorEggShow"/>
+                    <Image Height="100" Canvas.Left="309" Canvas.Top="475" Width="100" Source="/Assets2/sunflower.png" Margin="12,22,19,14" RenderTransformOrigin="0.616,0.899" Tap="colorEggShow"  >
+                        <Image.RenderTransform>
+                            <RotateTransform x:Name="sunflowerRoateTransform" Angle="0"  CenterX="13" CenterY="15"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+                <Grid x:Name="colorEggSun" Height="102" Canvas.Left="256" Canvas.Top="-102" Width="198" Visibility="Collapsed">
+                    <Image x:Name="image" HorizontalAlignment="Left" Height="54" Margin="53,0,0,0" VerticalAlignment="Top" Width="55" Source="/Assets2/SunColorEgg.png">
+                        <Image.Projection>
+                            <PlaneProjection/>
+                        </Image.Projection>
+                    </Image>
+                </Grid>
+            </Canvas>
+            <!--图章选择框-->
+            <Grid x:Name="iconSelectGrid" HorizontalAlignment="Left" Height="224" Margin="3,132,-0.475,0" VerticalAlignment="Top" Width="479" Background="#4C1B1B1B" Visibility="Collapsed">
+                <Grid.Projection>
+                    <PlaneProjection/>
+                </Grid.Projection>
+                <Button x:Name="iconGridCameraButton" Content="Camera" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" BorderBrush="White" Foreground="White" Margin="-11,34,0,0" Click="iconGridCameraButton_Click" Width="112" FontSize="16" Height="71"/>
+                <Button x:Name="iconGridAlbumButton" Content="Album" HorizontalAlignment="Left" Margin="-11,123,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" Click="iconGridAlbumButton_Click" Width="112" FontSize="21"/>
+                <Grid HorizontalAlignment="Left" Height="239" Margin="101,0,0,-93" VerticalAlignment="Top" Width="378">
+                    <ListBox Margin="0,0,0,24">
+                        <Grid Height="230">
+                            <Button x:Name="emotionButton1" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="0,1,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Smile.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton2" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="302,1,0,0"  Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Happy.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton3" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="231,1,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Love.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton4" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="153,1,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Wink.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton5" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="78,1,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Cool.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton6" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="0,74,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Angry.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton7" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="302,74,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Cry.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton8" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="231,74,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Confused.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton9" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="153,74,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Sad.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton10" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="78,74,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Sleepy.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton11" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="-1,147,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Surprised.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton12" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="301,147,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Coffee.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton13" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="230,147,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Bookmark-New.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton14" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="152,147,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Cheeky.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="emotionButton15" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="75" Height="73" Margin="77,147,0,0" Click="emotionButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Assets2/icons/emotions/Speechless.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                        </Grid>
+                    </ListBox>
+                </Grid>
+            </Grid>
+            <!--修改栏，每个模板显示不同的按钮组，由showEditGridButton显示，隐藏时显示showEditGridButton-->
+            <Grid x:Name="editGrid" HorizontalAlignment="Left" Height="102" Margin="0,30,-0.475,0" VerticalAlignment="Top" Width="482" Visibility="Collapsed">
+                <Grid.Projection>
+                    <PlaneProjection/>
+                </Grid.Projection>
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.5">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#7F000000" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Button x:Name="fontColorButton" Content="" HorizontalAlignment="Left" Margin="239,0,0,0" VerticalAlignment="Top" Width="78" BorderThickness="0" Height="78" Click="fontSettingButtonClick">
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Assets2/Palette.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="fontColorButtonToast" HorizontalAlignment="Left" Margin="253,71,0,0" TextWrapping="Wrap" Text="Color" VerticalAlignment="Top" Foreground="White"/>
+                <Button x:Name="hideEditGridButton" Content="" HorizontalAlignment="Left" Margin="406,0,0,0" VerticalAlignment="Top" BorderThickness="0" Height="78" Width="76" Click="hideEditGridButton_Click">
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Assets2/ArrowHead-Right.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="hideEditGridButtonToast" HorizontalAlignment="Left" Margin="420,71,0,0" TextWrapping="Wrap" Text="Hide" VerticalAlignment="Top" Foreground="White"/>
+                <Button x:Name="roatePICButton" Content="" HorizontalAlignment="Left" Margin="322,0,0,0" VerticalAlignment="Top" Width="79" Height="78" BorderThickness="0" Click="roatePICButton_Click">
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Assets2/roate.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="roatePICButtonToast" HorizontalAlignment="Left" Margin="337,69,0,0" TextWrapping="Wrap" Text="Roate" VerticalAlignment="Top" Foreground="White"/>
+                <Button x:Name="textEditButton" Content="" HorizontalAlignment="Left" Margin="160,0,0,24" Width="78" Height="78" BorderThickness="0" Click="textEditButton_Click">
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Assets2/Message Edit.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="aqiSwitchButtonToast" HorizontalAlignment="Left" Margin="157,71,0,0" TextWrapping="Wrap" Text="Info" VerticalAlignment="Top" Foreground="White"/>
+                <Button x:Name="aqiSwitchButton" Content="" HorizontalAlignment="Left" Margin="160,0,0,24" Width="78" Height="78" BorderThickness="0" Click="aqiSwitchButton_Click">
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Assets2/Satellite.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="textEditButtonToast" HorizontalAlignment="Left" Margin="157,71,0,0" TextWrapping="Wrap" Text="Wrods" VerticalAlignment="Top" Foreground="White"/>
+                <Button x:Name="textEditButton2" Content="" HorizontalAlignment="Left" Margin="83,0,0,24" Width="78" Height="78" BorderThickness="0" Click="textEditButton_Click">
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Assets2/Message Edit.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="textEditButtonToast2" HorizontalAlignment="Left" Margin="81,71,0,0" TextWrapping="Wrap" Text="Words" VerticalAlignment="Top" Foreground="White"/>
+                <Button x:Name="myiconButton" HorizontalAlignment="Left" Margin="161,0,0,0" Width="78" BorderThickness="0" Click="myiconButton_Click" Height="78" VerticalAlignment="Top">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets2/IDCard.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="myiconButtonToast" HorizontalAlignment="Left" Margin="176,73,0,0" TextWrapping="Wrap" Text="Icon" VerticalAlignment="Top" Foreground="White"/>
+                <CheckBox x:Name="editGridCheck" Content="Time" HorizontalAlignment="Left" Margin="42,0,0,0" VerticalAlignment="Top" IsChecked="True" Height="78" Checked="timeCheck_Checked" Unchecked="timeCheck_Unchecked" Foreground="White" BorderBrush="#26FFFFFF"/>
+                <Button x:Name="tripBeginButton" HorizontalAlignment="Left" Margin="80,0,0,0" Width="78" BorderThickness="0" Click="tripBeginButton_Click" Height="78" VerticalAlignment="Top">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets2/AppBar/LocationMarkerWhite0.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="tripBeginButtonToast" HorizontalAlignment="Left" Margin="76,71,0,0" TextWrapping="Wrap" Text="StartPoint" VerticalAlignment="Top" Foreground="White"/>
+                <Button x:Name="tripEndButton" HorizontalAlignment="Left" Margin="161,0,0,0" Width="78" BorderThickness="0" Click="tripEndButton_Click" Height="78" VerticalAlignment="Top">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets2/AppBar/LocationMarkerWhite1.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="tripEndButtonToast" HorizontalAlignment="Left" Margin="164,71,0,0" TextWrapping="Wrap" Text="EndPoint" VerticalAlignment="Top" Foreground="White"/>
+                <Button x:Name="bgColorButton" HorizontalAlignment="Left" Margin="3,0,0,0" Width="78" BorderThickness="0" Click="bgColorButton_Click" Height="78" VerticalAlignment="Top">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets2/BGColor.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="bgColorButtonToast" HorizontalAlignment="Left" Margin="17,71,0,0" TextWrapping="Wrap" Text="Back" VerticalAlignment="Top" Foreground="White"/>
+            </Grid>
+            <!--背景色选择框，有12个颜色-->
+            <Grid x:Name="backcolorEditGrid" HorizontalAlignment="Left" Height="146" Margin="2,132,-4.475,0" VerticalAlignment="Top" Width="484" Visibility="Collapsed">
+                <Grid.Projection>
+                    <PlaneProjection/>
+                </Grid.Projection>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="213*"/>
+                    <ColumnDefinition Width="271*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#7F000000" Offset="0"/>
+                        <GradientStop Color="#7F000000" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Button x:Name="bgcolor1" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0" Width="79" BorderThickness="5" Height="74" Foreground="White" Background="#FF0C0C0C" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor2" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="84,0,0,0" Width="79" BorderThickness="5" Height="74" Background="#FFF74747" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor3" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="168,0,0,0" Width="79" BorderThickness="5" Height="74" Background="#FFFB8F34" Grid.ColumnSpan="2" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor4" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34.272,0,0,0" Width="79" BorderThickness="5" Height="74" Background="#FF31BDFF" Grid.Column="1" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor5" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="114.272,72,0,0" Width="79" BorderThickness="5" Height="74" Background="#FF6666FF" Grid.Column="1" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor6" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="192.272,0,0,0" Width="79" BorderThickness="5" Height="74" Background="#FF9933FF" Grid.Column="1" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor7" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,72,0,0" Width="79" BorderThickness="5" Height="74" Foreground="White" Background="White" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor8" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="84,72,0,0" Width="79" BorderThickness="5" Height="74" Background="#FFFF6A9A" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor9" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="168,72,0,0" Width="79" BorderThickness="5" Height="74" Background="#FFFFFF99" Grid.ColumnSpan="2" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor10" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34.272,72,0,0" Width="79" BorderThickness="5" Height="74" Background="#FF99CCFF" Grid.Column="1" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor11" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="113.272,0,0,0" Width="79" BorderThickness="5" Height="74" Background="#FF339933" Grid.Column="1" Click="bgColorSetButton_Click"/>
+                <Button x:Name="bgcolor12" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="192.272,72,0,0" Width="79" BorderThickness="5" Height="74" Background="#FFFFCCCC" Grid.Column="1" Click="bgColorSetButton_Click"/>
+            </Grid>
+        </Grid>
+        <!--标题栏，水印相机-->
+        <Grid x:Name="watermarkTitleGrid" HorizontalAlignment="Left" Height="87" Margin="20,0,0,0" VerticalAlignment="Top" Width="460" Grid.RowSpan="2">
+            <TextBlock x:Name="TitleCH" TextWrapping="Wrap" Text="Watermark Camera" FontSize="34" Margin="-12.429,1.862,-8.497,22.134" RenderTransformOrigin="0.496,0.442" HorizontalAlignment="Left" Width="480.926" Foreground="#FF8FAAF9" UseLayoutRounding="False" d:LayoutRounding="Auto" FontFamily="Segoe WP Black" FontWeight="Bold">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="1.853" SkewX="1" SkewY="-2"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
+        <!--模板选择栏，完成-->
+        <Grid x:Name="templateSelectNameGrid" HorizontalAlignment="Left" Height="98" Margin="0,344,-2,0" Grid.Row="2" VerticalAlignment="Top" Width="482" Background="#99F7D4AA" Grid.RowSpan="1" Visibility="Collapsed">
+            <Grid.Projection>
+                <PlaneProjection/>
+            </Grid.Projection>
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+                <StackPanel Orientation="Horizontal" Height="99" >
+                    <Button x:Name="templateButton0" Content=" Time " Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton1" Content="Weather" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick" FontSize="20"/>
+                    <Button x:Name="templateButton2" Content="Volume" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick" FontSize="20"/>
+                    <Button x:Name="templateButton3" Content="Rectangle" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick" FontSize="20"/>
+                    <Button x:Name="templateButton4" Content=" Icon " Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton5" Content="Travel" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton6" Content=" Label " Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton7" Content="Greeting" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                    <Button x:Name="templateButton8" Content="Location" Foreground="White" BorderBrush="#FF8FAAF9" Background="#FF8FAAF9" Click="selectNameButtonClick"/>
+                </StackPanel>
+            </ListBox>
+        </Grid>
+        <!--指示模板序号的方块组合-->
+        <Grid x:Name="processStepGrid" HorizontalAlignment="Left" Height="26" Margin="10,424,0,0" Grid.Row="2" VerticalAlignment="Top" Width="460" Visibility="Collapsed">
+            <Rectangle x:Name="processStep0" Fill="#992E2E2E" HorizontalAlignment="Left" Height="9" Margin="5,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28" />
+            <Rectangle x:Name="processStep1" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="33,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep2" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="61,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep3" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="89,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep4" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="117,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep5" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="145,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep6" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="173,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep7" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="201,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep8" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="229,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep9" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="257,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep10" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="285,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep11" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="313,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep12" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="341,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep13" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="369,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep14" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="397,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+            <Rectangle x:Name="processStep15" Fill="#4C2E2E2E" HorizontalAlignment="Left" Height="9" Margin="425,10,0,0" Stroke="#66FFFFFF" VerticalAlignment="Top" Width="28"/>
+        </Grid>
+        <!--输入框-->
+        <Grid x:Name="inputGrid" HorizontalAlignment="Left" Height="162" Margin="0,111,-2,0" VerticalAlignment="Top" Width="482" Background="#66000000" Visibility="Collapsed">
+            <TextBox x:Name="inputBox" HorizontalAlignment="Left" Height="142" TextWrapping="Wrap" VerticalAlignment="Top" Width="482" FontSize="22" Margin="0,10,0,0" AcceptsReturn="True" LostFocus="inputBox_LostFocus" TextChanged="inputBox_TextChanged" RenderTransformOrigin="0.5,0.5">
+                <TextBox.RenderTransform>
+                    <CompositeTransform/>
+                </TextBox.RenderTransform>
+            </TextBox>
+        </Grid>
+        <!--因为某些必须完成的工作而禁止其他控件运行，置为最前-->
+        <Grid x:Name="loadpauseGrid" HorizontalAlignment="Left" Height="773" Margin="0,-5,-2,0" VerticalAlignment="Top" Width="482" Background="#7F151515" Grid.RowSpan="3" Visibility="Collapsed">
+            <TextBlock x:Name="timeoutFailText" HorizontalAlignment="Left" Margin="0,402,0,0" TextWrapping="Wrap" Text="Loading..." VerticalAlignment="Top" Height="29" Width="482" Foreground="White" TextAlignment="Center" FontSize="23"/>
+            <ProgressBar HorizontalAlignment="Left" Height="15" Margin="121,438,0,0" VerticalAlignment="Top" Width="217" RenderTransformOrigin="0.5,0.5" IsIndeterminate="True">
+                <ProgressBar.RenderTransform>
+                    <CompositeTransform ScaleY="-1"/>
+                </ProgressBar.RenderTransform>
+            </ProgressBar>
+        </Grid>
+        <!--顶部的提示条幅-->
+        <Grid x:Name="toastgrid" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="482" Background="{StaticResource PhoneAccentBrush}" RenderTransformOrigin="0.5,0.5" Margin="-8,0,0,0" Visibility="Collapsed">
+            <Grid.RenderTransform>
+                <CompositeTransform TranslateX="7.056"/>
+            </Grid.RenderTransform>
+            <TextBlock x:Name="toastText" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="460" FontSize="22" Margin="10,0,0,0" Height="37"/>
+        </Grid>
+        <!--实时取景相机的编辑框-->
+        <Grid x:Name="realCameraAppBarGrid" HorizontalAlignment="Left" Height="78" Margin="0,442,-16,-4" VerticalAlignment="Top" Width="496" Background="#99000000" Grid.Row="2" Visibility="Collapsed">
+            <Button x:Name="realGridSettingButton" Content="" HorizontalAlignment="Right" Margin="0,3,8,0" VerticalAlignment="Top" BorderThickness="2,0,0,0" Width="81" Height="72" Click="realGridSettingButton_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Assets2/Settings.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="realGridEditButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="69" BorderThickness="0,0,2,0" Margin="2,6,0,0" Click="realGridEditButton_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Assets2/Editors.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="realGridFlashButton" Content="" HorizontalAlignment="Left" Margin="64,3,0,0" VerticalAlignment="Top" BorderThickness="0,0,2,0" Width="98" Height="72" Click="realGridFlashButton_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Assets2/FlashOn.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="realGridFocusButton" Content="" HorizontalAlignment="Left" Margin="319,3,0,0" VerticalAlignment="Top" Width="97" BorderThickness="2,0,0,0" Height="72" Click="realGridFocusButton_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Assets2/Focus.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="realGridCameraButton" Content="" HorizontalAlignment="Right" Margin="0,3,165,0" VerticalAlignment="Top" Width="180" BorderThickness="0" Height="74" Click="realGridCameraButton_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Assets2/Camera2BigAreaBlank.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+        <!--实时取景相机按钮提示框-->
+        <!--<Grid x:Name="realToastGrid" HorizontalAlignment="Left" Margin="-2,516,0,-44" Grid.Row="2" Width="482" Background="#CC000000" Visibility="Collapsed">
+            <TextBlock HorizontalAlignment="Left" Margin="0,2,0,0" TextWrapping="Wrap" Text="编辑" VerticalAlignment="Top" FontSize="30" Foreground="White"/>
+            <TextBlock HorizontalAlignment="Left" Margin="81,2,0,0" TextWrapping="Wrap" Text="闪光" VerticalAlignment="Top" FontSize="30" Foreground="White" RenderTransformOrigin="0.6,0.388"/>
+            <TextBlock HorizontalAlignment="Left" Margin="200,2,0,0" TextWrapping="Wrap" Text="拍  摄" VerticalAlignment="Top" FontSize="30" Foreground="White"/>
+            <TextBlock HorizontalAlignment="Left" Margin="333,2,0,0" TextWrapping="Wrap" Text="对焦" VerticalAlignment="Top" FontSize="30" Foreground="White"/>
+            <TextBlock HorizontalAlignment="Left" Margin="412,2,0,0" TextWrapping="Wrap" Text="设置" VerticalAlignment="Top" Foreground="White" FontSize="30"/>
+        </Grid>-->
+        <!--<Canvas x:Name="photo_zoom_Grid" Grid.RowSpan="3" >-->
+        <!--</Canvas>-->
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar x:Name="MainBar" IsVisible="False" Opacity="0.6" IsMenuEnabled="True">
+            <!--<shell:ApplicationBarIconButton x:Name="takePhotoButton" IconUri="/Assets2/AppBar/appbar.feature.camera.rest.png" Text="拍  摄" Click="cameraCaptureButton"  />-->
+            <!--<shell:ApplicationBarIconButton x:Name="choosePhotoButton" IconUri="/Assets2/AppBar/appbar.folder.rest.png" Text="相  册" Click="choosePhoto"  />-->
+            <shell:ApplicationBarIconButton x:Name="indexButton" IconUri="/Assets2/AppBar/appbar.edit.rest.png" Text="Edit" Click="editphoto_barButton"  />
+            <shell:ApplicationBarIconButton x:Name="flashInfoButton" IconUri="/Assets2/AppBar/appbar.sync.rest.png" Text="FlashInfo" Click="InfoFlashButton_Click" />
+            <shell:ApplicationBarIconButton x:Name="confirmButton" IconUri="/Assets2/AppBar/appbar.save.rest.png" Text="Save" Click="confirmMark" />
+            <shell:ApplicationBarIconButton x:Name="templateSelectButton" IconUri="/Toolkit.Content/ApplicationBar.Select.png" Text="list" Click="SelectNameTmp_Click" />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="settingButton" IsEnabled="True" Text="Settings" Click="Setting_Click"/>
+                <shell:ApplicationBarMenuItem x:Name="makeBaoman" IsEnabled="True" Text="Puzzle long picture" Click="makeBaomanButtonClick"/>
+                <!--<shell:ApplicationBarMenuItem x:Name="RealTimeCameraButton" IsEnabled="True" Text="实时相机" Click="realTimeCameraButtonClick"/>-->
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

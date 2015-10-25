@@ -1,0 +1,107 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="WaterMark.WTool.IconMakePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="animation_toastshow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="toastgrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.002"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="toastgrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-232.444"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="7.556"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="7.556"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="7.556"/>
+            </DoubleAnimationUsingKeyFrames>
+            <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="toastgrid">
+                <EasingPointKeyFrame KeyTime="0" Value="0.5,0.5"/>
+                <EasingPointKeyFrame KeyTime="0:0:0.1" Value="0,0.5"/>
+            </PointAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="toastgrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="#FFF5E8BD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        </StackPanel>
+        <!--顶部的提示条幅-->
+        <Canvas x:Name="saveGrid" Margin="0,10,0,243" Grid.Row="1">
+            <Image x:Name="ImgZoom" HorizontalAlignment="Left" Height="472" VerticalAlignment="Top" Width="480" Source="/WaterMark;component/TemplateSetting/PICs/template2.jpg" Grid.Row="1" Stretch="UniformToFill" Canvas.Top="-2">
+                <toolkit:GestureService.GestureListener>
+                    <toolkit:GestureListener
+                        PinchStarted="OnPinchStarted"
+                        PinchDelta="OnPinchDelta"
+                        DragDelta="OnDragDelta"
+                        DoubleTap="OnDoubleTap"/>
+                </toolkit:GestureService.GestureListener>
+                <Image.RenderTransform>
+                    <CompositeTransform
+                        ScaleX="1" ScaleY="1"
+                        TranslateX="0" TranslateY="0"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image HorizontalAlignment="Left" Height="470" VerticalAlignment="Top" Width="480" Source="IconMakerIMG/MakerIconcircle.png" Stretch="UniformToFill"/>
+        </Canvas>
+
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,216">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Canvas Margin="0,0,0,224" >
+                <Image x:Name="m_photo" Source="/WaterMark;component/Assets2/empty400_400.png" Height="483" Width="480" Visibility="Collapsed" />
+            </Canvas>
+        </Grid>
+        <Image HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="480" Source="IconMakerIMG/BackYellowBlank.jpg" Stretch="Fill" Grid.RowSpan="2"/>
+        <TextBlock Text="水印相机——头像制作" Style="{StaticResource PhoneTextNormalStyle}" Foreground="CornflowerBlue" Margin="10,6,16,717" Grid.RowSpan="2" FontSize="25"/>
+        <Image HorizontalAlignment="Left" Height="243" Margin="0,480,0,0" Grid.Row="1" VerticalAlignment="Top" Width="480" Source="IconMakerIMG/BackYellowBlank.jpg" Stretch="Fill"/>
+        <Grid x:Name="toastgrid" HorizontalAlignment="Left" Height="47" VerticalAlignment="Top" Width="486" Background="{StaticResource PhoneAccentBrush}" RenderTransformOrigin="0.5,0.5" Margin="-12,-2,0,0" Visibility="Collapsed">
+            <Grid.RenderTransform>
+                <CompositeTransform TranslateX="7.056"/>
+            </Grid.RenderTransform>
+            <TextBlock x:Name="toastText" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="460" FontSize="22" Margin="10,0,0,0" Height="37"/>
+        </Grid>
+        <Rectangle HorizontalAlignment="Left" Height="465" Margin="0,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="480" Stroke="#FF0074FF" StrokeThickness="3"/>
+        <Image x:Name="testIMG" HorizontalAlignment="Left" Height="147" Margin="10,485,0,0" Grid.Row="1" VerticalAlignment="Top" Width="180"/>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar x:Name="MainBar" IsVisible="True" Opacity="0.6" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="photoButton" IconUri="/Assets2/appbar.feature.camera.rest.png" Text="拍 摄" Click="photoButton_Click"   />
+            <shell:ApplicationBarIconButton x:Name="albumButton" IconUri="/Assets2/AppBar/appbar.favs.rest.png" Text="相 册" Click="albumButton_Click" />
+            <shell:ApplicationBarIconButton x:Name="confirmButton" IconUri="/Assets2/AppBar/appbar.save.rest.png" Text="保  存" Click="confirmButton_Click" />
+            <!--<shell:ApplicationBarIconButton x:Name="templateSelectButton" IconUri="/Toolkit.Content/ApplicationBar.Select.png" Text="模板列表" Click="SelectNameTmp_Click" />-->
+            <!--<shell:ApplicationBar.MenuItems>-->
+            <!--<shell:ApplicationBarMenuItem x:Name="settingButton" IsEnabled="True" Text="设   置" Click="Setting_Click"/>-->
+            <!--<shell:ApplicationBarMenuItem x:Name="makeBaoman" IsEnabled="True" Text="拼接长图" Click="makeBaomanButtonClick"/>-->
+            <!--<shell:ApplicationBarMenuItem x:Name="RealTimeCameraButton" IsEnabled="True" Text="实时相机" Click="realTimeCameraButtonClick"/>-->
+            <!--</shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

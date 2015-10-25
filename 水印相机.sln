@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "水印相机", "水印相机\水印相机.csproj", "{AE076DD2-5B0F-4E9E-BAFA-368880765C24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenrenSDKLibrary", "水印相机\RenrenSDKLibrary\RenrenSDKLibrary.csproj", "{A0DAF137-14D2-4F92-B438-A449FCC48D09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE076DD2-5B0F-4E9E-BAFA-368880765C24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE076DD2-5B0F-4E9E-BAFA-368880765C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE076DD2-5B0F-4E9E-BAFA-368880765C24}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AE076DD2-5B0F-4E9E-BAFA-368880765C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE076DD2-5B0F-4E9E-BAFA-368880765C24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE076DD2-5B0F-4E9E-BAFA-368880765C24}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A0DAF137-14D2-4F92-B438-A449FCC48D09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0DAF137-14D2-4F92-B438-A449FCC48D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0DAF137-14D2-4F92-B438-A449FCC48D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0DAF137-14D2-4F92-B438-A449FCC48D09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

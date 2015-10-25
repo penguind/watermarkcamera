@@ -1,0 +1,53 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="WaterMark.WTool.PuzzlePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    Style="{StaticResource PageTranstionStyle}"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--枢轴控件-->
+        <controls:Pivot Title="我的应用程序">
+            <!--枢轴项一-->
+            <controls:PivotItem Header="三图" Background="{x:Null}">
+                <Grid>
+                    <Button Content="" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="399" Width="285" BorderThickness="2" Background="{x:Null}"/>
+                    <Button Content="" HorizontalAlignment="Left" Margin="285,10,0,0" VerticalAlignment="Top" Height="186" Width="161" BorderThickness="2" RenderTransformOrigin="0.494,0.505" Background="{x:Null}"/>
+                    <Button Content="" HorizontalAlignment="Left" Margin="285,196,0,0" VerticalAlignment="Top" Height="213" Width="161" BorderThickness="2" Background="{x:Null}"/>
+
+                </Grid>
+            </controls:PivotItem>
+
+            <!--枢轴项二-->
+            <controls:PivotItem Header="四图">
+                <Grid Margin="22,0,19,10" Background="#FFFF8B8B">
+                    <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="380" Width="270"/>
+                    <Button Content="" HorizontalAlignment="Left" Margin="256,0,0,0" VerticalAlignment="Top" Height="195" Width="160"/>
+                    <Button Content="" HorizontalAlignment="Left" Margin="256,187,0,0" VerticalAlignment="Top" Height="193" Width="160"/>
+                    <Button Content="" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Height="230" Width="416"/>
+                </Grid>
+            </controls:PivotItem>
+
+            <!--枢轴项二-->
+            <controls:PivotItem Header="五图">
+                <Grid>
+                    <Button Margin="0,0,248,389" />
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="0,203,0,0" VerticalAlignment="Top" Height="214" Width="208"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="208,10,0,0" VerticalAlignment="Top" Height="407" Width="238"/>
+                </Grid>
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>

@@ -1,0 +1,65 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="WaterMark.GuidePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False" BackKeyPress="PhoneApplicationPage_BackKeyPress">
+
+    <!--LayoutRoot 包含根网格，其他所有页面内容都位于根网格中-->
+    <Grid x:Name="LayoutRoot">
+        <controls:Panorama Title="WaterMark Camera" FontSize="15" Background="#FFEFE4B0">
+
+            <!--Panorama 项目一-->
+            <controls:PanoramaItem Header="" BorderBrush="#FFD44A0A" Height="618">
+                <controls:PanoramaItem.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="1_800.png"/>
+                </controls:PanoramaItem.Background>
+                <Grid Margin="-10,0,0,0"/>
+            </controls:PanoramaItem>
+
+            <!--Panorama 项目二-->
+            <controls:PanoramaItem Header="" BorderBrush="#FFD44A0A">
+                <controls:PanoramaItem.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="2_800.png"/>
+                </controls:PanoramaItem.Background>
+                <Grid/>
+            </controls:PanoramaItem>
+            
+            <!--Panorama 项目3-->
+            <controls:PanoramaItem Header="" BorderBrush="#FFD44A0A">
+                <controls:PanoramaItem.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="3_800.png"/>
+                </controls:PanoramaItem.Background>
+                <Grid Margin="-10,0,0,0"/>
+            </controls:PanoramaItem>
+
+            <!--Panorama 项目4-->
+            <controls:PanoramaItem Header="" BorderBrush="#FFD44A0A">
+                <controls:PanoramaItem.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="4_800.png"/>
+                </controls:PanoramaItem.Background>
+                <Grid Margin="-10,0,0,0"/>
+            </controls:PanoramaItem>
+
+            <!--Panorama 项目5-->
+            <controls:PanoramaItem Header="" BorderBrush="#FFD44A0A">
+                <controls:PanoramaItem.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="5_800.png"/>
+                </controls:PanoramaItem.Background>
+                <Grid HorizontalAlignment="Left" Height="588" VerticalAlignment="Top" Width="419">
+                    <Button x:Name="beginButton" Content="" HorizontalAlignment="Left" Margin="121,363,0,0" VerticalAlignment="Top" Height="129" Width="170" BorderBrush="Transparent" Foreground="Transparent" Click="beginButton_Click"/>
+                </Grid>
+            </controls:PanoramaItem>
+        </controls:Panorama>
+    </Grid>
+
+</phone:PhoneApplicationPage>

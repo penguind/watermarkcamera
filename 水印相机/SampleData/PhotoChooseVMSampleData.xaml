@@ -1,0 +1,14 @@
+<ViewModel:PhotoChooseVM xmlns:ViewModel="clr-namespace:WaterMark.ViewModel">
+	<ViewModel:PhotoChooseVM.allPhotos>
+		<ViewModel:PhotoChoose iconURI="Class cras vestibulum"/>
+		<ViewModel:PhotoChoose iconURI="Aliquam adipiscing"/>
+		<ViewModel:PhotoChoose iconURI="Duis nunc amet maecenas praesent"/>
+		<ViewModel:PhotoChoose iconURI="Integer ante quisque aenean"/>
+		<ViewModel:PhotoChoose iconURI="Curabitur phasellus curae vivamus nam"/>
+		<ViewModel:PhotoChoose iconURI="Parturient sed"/>
+		<ViewModel:PhotoChoose iconURI="Consequat arcu"/>
+		<ViewModel:PhotoChoose iconURI="Aliquam vestibulum"/>
+		<ViewModel:PhotoChoose iconURI="Accumsan mauris vestibulum aliquet"/>
+		<ViewModel:PhotoChoose iconURI="Blandit adipiscing donec commodo"/>
+	</ViewModel:PhotoChooseVM.allPhotos>
+</ViewModel:PhotoChooseVM>

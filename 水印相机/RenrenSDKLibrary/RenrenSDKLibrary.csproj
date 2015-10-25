@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A0DAF137-14D2-4F92-B438-A449FCC48D09}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RenrenSDKLibrary</RootNamespace>
+    <AssemblyName>RenrenSDKLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>.\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="System.Servicemodel.Web" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="mscorlib.extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\APIRequestBS.cs" />
+    <Compile Include="Business\BusinessBase.cs" />
+    <Compile Include="Constants\WidgetDialogType.cs" />
+    <Compile Include="CustomControls\OauthControl.xaml.cs">
+      <DependentUpon>OauthControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventArgs\APIRequestCompletedEventArgs.cs" />
+    <Compile Include="Helper\APIParameter.cs" />
+    <Compile Include="Helper\MD5Encry.cs" />
+    <Compile Include="Business\CreateAlbumBS.cs" />
+    <Compile Include="Business\FriendBS.cs" />
+    <Compile Include="Business\GetAlbumsBS.cs" />
+    <Compile Include="Business\GetUserInfoBS.cs" />
+    <Compile Include="Business\LoginBS.cs" />
+    <Compile Include="Model\AccessToken.cs" />
+    <Compile Include="Pages\UploadPhotoPage.xaml.cs">
+      <DependentUpon>UploadPhotoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Request\APIRequest.cs" />
+    <Compile Include="WidgetDialog\LoginViewBS.cs" />
+    <Compile Include="Business\UploadPhotoBS.cs" />
+    <Compile Include="Constants\ConstantValue.cs" />
+    <Compile Include="Constants\Method.cs" />
+    <Compile Include="Browser\BrowserControl.xaml.cs">
+      <DependentUpon>BrowserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventArgs\CreateAlbumCompletedEventArgs.cs" />
+    <Compile Include="EventArgs\GetAlbumsCompletedEventArgs.cs" />
+    <Compile Include="EventArgs\GetAppFriendsCompletedEventArgs.cs" />
+    <Compile Include="EventArgs\GetAppFriendsIDCompletedEventArgs.cs" />
+    <Compile Include="EventArgs\GetFriendsCompletedEventArgs.cs" />
+    <Compile Include="EventArgs\GetFriendsIDCompletedEventArgs.cs" />
+    <Compile Include="EventArgs\GetUsersCompletedEventArgs.cs" />
+    <Compile Include="EventArgs\GetUserUidCompletedEventArgs.cs" />
+    <Compile Include="EventArgs\LoginCompletedEventArgs.cs" />
+    <Compile Include="EventArgs\UploadPhotoCompletedEventArgs.cs" />
+    <Compile Include="Helper\ApiHelper.cs" />
+    <Compile Include="Helper\JsonUtility.cs" />
+    <Compile Include="Model\Album.cs" />
+    <Compile Include="Model\AppFriend.cs" />
+    <Compile Include="Model\ErrorMessage.cs" />
+    <Compile Include="Model\Friend.cs" />
+    <Compile Include="Model\Photo.cs" />
+    <Compile Include="Model\RequestParameterEntity.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserInfo.cs" />
+    <Compile Include="Model\UserList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenrenAPI.cs" />
+    <Compile Include="RenrenSDK.cs" />
+    <Compile Include="Request\CreateAlbumRequest.cs" />
+    <Compile Include="Request\GetAlbumsRequest.cs" />
+    <Compile Include="Request\GetAppFriendsRequest.cs" />
+    <Compile Include="Request\GetCurUserInfoRequest.cs" />
+    <Compile Include="Request\GetFriendsIDRequest.cs" />
+    <Compile Include="Request\GetFriendsRequest.cs" />
+    <Compile Include="Request\GetUserInfoRequest.cs" />
+    <Compile Include="Request\LoginRequest.cs" />
+    <Compile Include="Request\RenrenClient.cs" />
+    <Compile Include="Request\UploadPhotoRequest.cs" />
+    <Compile Include="EventArgs\DownloadStringCompletedEventArgs.cs" />
+    <Compile Include="WebRequest\RenrenWebRequest.cs" />
+    <Compile Include="WidgetDialog\WidgetAPIRequestBS.cs" />
+    <Compile Include="WidgetDialog\WidgetDialog.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bin\Debug\Newtonsoft.Json.WindowsPhone.dll" />
+    <Resource Include="Images\head-frame%402x.png" />
+    <Resource Include="Images\renren-logo-top-bar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Browser\BrowserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\OauthControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UploadPhotoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bin\Release\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
